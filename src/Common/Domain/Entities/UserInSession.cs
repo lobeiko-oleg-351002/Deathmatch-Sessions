@@ -5,13 +5,11 @@ namespace Domain.Entities;
 public class UserInSession : BaseEntity
 {
     [Required]
-    public virtual User User { get; set; }
-
+    public required Guid UserId { get; set; }
     [Required]
     public virtual required Session Session { get; set; }
-
-    public int KillCount { get; set; }
-    public int DeathCount { get; set; }
-
-
+    [Required]
+    public required int KillCount { get; set; }
+    [Required]
+    public required int DeathCount { get; set; }
 }

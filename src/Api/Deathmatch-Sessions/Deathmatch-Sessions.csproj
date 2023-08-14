@@ -7,4 +7,26 @@
     <RootNamespace>Deathmatch_Sessions</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Application.Common\Application.Common.csproj" />
+    <ProjectReference Include="..\..\Common\Infrastructure.Common\Infrastructure.Common.csproj" />
+    <ProjectReference Include="..\..\Locations\Application.Locations\Application.Locations.csproj" />
+    <ProjectReference Include="..\..\Locations\Infrastructure.Locations\Infrastructure.Locations.csproj" />
+    <ProjectReference Include="..\..\Sessions\Application.Sessions\Application.Sessions.csproj" />
+    <ProjectReference Include="..\..\Sessions\Infrastructure.Sessions\Infrastructure.Sessions.csproj" />
+  </ItemGroup>
+
 </Project>

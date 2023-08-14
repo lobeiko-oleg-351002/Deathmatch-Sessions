@@ -3,7 +3,7 @@ using Application.Locations.Interfaces;
 using AutoMapper;
 using MediatR;
 
-namespace deathmatch_micro.Application.Locations.Commands;
+namespace Application.Locations.Commands;
 public record CreateLocationCommand : IRequest<Unit>
 {
     public required string Name { get; set; }

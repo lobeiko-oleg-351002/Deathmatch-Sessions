@@ -1,33 +1,30 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
-using Infrastructure.Common;
 using Infrastructure.Common.Logging;
-using Infrastructure.Common.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAL.Repositories
+namespace Infrastructure.Common.Repository;
+
+public class UserInSessionRepository : Repository<UserInSession>, IUserInSessionRepository
 {
-    public class UserInSessionRepository : Repository<UserInSession>, IUserInSessionRepository
+    public UserInSessionRepository(ApplicationDbContext context, ILogMessageManager<UserInSession> logMessageManager) : base(context, logMessageManager)
     {
-        public UserInSessionRepository(ApplicationDbContext context, ILogMessageManager<UserInSession> logMessageManager) : base(context, logMessageManager)
-        {
 
-        }
+    }
 
-        public async Task<List<UserInSession>> GetUsersInParticularSession(Session session)
-        {
-            var items = _context.UserInSessions.Where(item => item.Session.Id == session.Id);
-            return await items.ToListAsync();
-        }
+    public async Task<List<UserInSession>> GetUsersInParticularSession(Session session)
+    {
+        var items = _context.UsersInSession.Where(item => item.Session.Id == session.Id);
+        return await items.ToListAsync();
+    }
 
-        public async Task RemoveByUserId(Guid userId)
+    public async Task RemoveByUserId(Guid userId)
+    {
+        var itemToDelete = await _context.UsersInSession.FirstOrDefaultAsync(item => item.UserId == userId);
+        if (itemToDelete != null)
         {
-            var itemToDelete = await _context.UserInSessions.FirstOrDefaultAsync(item => item.User.Id == userId);
-            if (itemToDelete != null)
-            {
-                _context.Remove(itemToDelete);
-                await _context.SaveChangesAsync();
-            }
+            _context.Remove(itemToDelete);
+            await _context.SaveChangesAsync();
         }
     }
 }

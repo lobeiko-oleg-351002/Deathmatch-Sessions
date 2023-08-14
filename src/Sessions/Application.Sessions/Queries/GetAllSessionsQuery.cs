@@ -1,22 +1,24 @@
 ﻿using Application.Locations.DTO;
 using Application.Locations.Interfaces;
+using Application.Sessions.DTO;
+using Application.Sessions.Interfaces;
 using MediatR;
 
 namespace Application.Locations.Queries;
-public class GetAllSessionsQuery : IRequest<IList<ViewLocationDTO>>
+public class GetAllSessionsQuery : IRequest<IList<ViewSessionDTO>>
 {
 }
 
-public class GetAllLocationsQueryHandler : IRequestHandler<GetAllSessionsQuery, IList<ViewLocationDTO>>
+public class GetAllSessionsQueryHandler : IRequestHandler<GetAllSessionsQuery, IList<ViewSessionDTO>>
 {
-    private readonly ILocationService _LocationService;
+    private readonly ISessionService _sessionService;
 
-    public GetAllLocationsQueryHandler(ILocationService LocationService)
+    public GetAllSessionsQueryHandler(ISessionService sessionService)
     {
-        _LocationService = LocationService;
+        _sessionService = sessionService;
     }
-    public async Task<IList<ViewLocationDTO>> Handle(GetAllSessionsQuery request, CancellationToken cancellationToken)
+    public async Task<IList<ViewSessionDTO>> Handle(GetAllSessionsQuery request, CancellationToken cancellationToken)
     {
-        return await _LocationService.GetAll();
+        return await _sessionService.GetAll();
     }
 }

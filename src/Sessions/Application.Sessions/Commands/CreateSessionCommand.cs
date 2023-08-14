@@ -4,16 +4,16 @@ using Application.Sessions.Interfaces;
 using AutoMapper;
 using MediatR;
 
-namespace deathmatch_micro.Application.Sessions.Commands;
+namespace Application.Sessions.Commands;
 public record CreateSessionCommand : IRequest<Unit>
 {
     public required string Name { get; set; }
 
     public required int MaxPlayerCount { get; set; }
 
-    public required ViewLocationDTO Level { get; set; }
+    public required string LevelId { get; set; }
 
-    public required ViewUserDTO Host { get; set; }
+    public required string UserHostId { get; set; }
 }
 
 public class CreateSessionCommandHandler : IRequestHandler<CreateSessionCommand, Unit>

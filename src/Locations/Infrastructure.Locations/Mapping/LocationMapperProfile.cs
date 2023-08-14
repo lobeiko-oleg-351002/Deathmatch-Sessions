@@ -1,4 +1,5 @@
-﻿using Application.Locations.DTO;
+﻿using Application.Locations.Commands;
+using Application.Locations.DTO;
 using AutoMapper;
 using Domain.Entities;
 
@@ -10,5 +11,8 @@ public class LocationMapperProfile : Profile
     {
         CreateMap<Location, ViewLocationDTO>()
             .ForMember(dto => dto.Id, entity => entity.MapFrom(x => x.Id.ToString()));
+        CreateMap<CreateLocationDTO, Location>()
+            .ForMember(entity => entity.Id, dto => dto.MapFrom(x => Guid.Parse(x.Id)));
+        CreateMap<CreateLocationCommand, CreateLocationDTO>().ForMember(x => x.Id, opt => opt.Ignore());
     }
 }

@@ -14,7 +14,7 @@ public class Session : BaseEntity
     public virtual required Location Level { get; set; }
 
     [Required]
-    public virtual User Host { get; set; }
+    public required Guid UserHostId { get; set; }
 
-    public virtual required List<UserInSession> UsersInSession { get; set; }
+    public virtual List<UserInSession> UsersInSession { get; set; }
 }
