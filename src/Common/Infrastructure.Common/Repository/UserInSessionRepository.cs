@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Infrastructure.Common.Exceptions;
 using Infrastructure.Common.Logging;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,11 @@ public class UserInSessionRepository : Repository<UserInSession>, IUserInSession
     public async Task<List<UserInSession>> GetUsersInParticularSession(Session session)
     {
         var items = _context.UsersInSession.Where(item => item.Session.Id == session.Id);
-        return await items.ToListAsync();
+        if (items.Any()) 
+        {
+            return await items.ToListAsync();
+        }
+        throw new NoElementsException();      
     }
 
     public async Task RemoveByUserId(Guid userId)

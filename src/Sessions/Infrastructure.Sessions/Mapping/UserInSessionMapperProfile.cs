@@ -1,5 +1,6 @@
 ﻿using Application.Sessions.Commands;
 using Application.Sessions.DTO;
+using Application.Sessions.Queries;
 using AutoMapper;
 using Domain.Entities;
 
@@ -12,5 +13,6 @@ public class UserInSessionMapperProfile : Profile
         CreateMap<UserInSession, ViewUserInSessionDTO>()
             .ForMember(dto => dto.Id, entity => entity.MapFrom(x => x.Id.ToString()));
         CreateMap<AddUserToSessionCommand, AddUserToSessionDTO>().ForMember(x => x.Id, opt => opt.Ignore());
+        CreateMap<GetUsersInSessionQuery, GetUsersInSessionDTO>();
     }
 }

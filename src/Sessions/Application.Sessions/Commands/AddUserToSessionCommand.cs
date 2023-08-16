@@ -24,7 +24,7 @@ public class AddUserToSessionCommandHandler : IRequestHandler<AddUserToSessionCo
 
     public async Task<Unit> Handle(AddUserToSessionCommand request, CancellationToken cancellationToken)
     {
-        await _SessionService.Create(_mapper.Map<CreateSessionDTO>(request));
+        await _SessionService.AddUserToSession(_mapper.Map<AddUserToSessionDTO>(request));
         return Unit.Value;
     }
 }

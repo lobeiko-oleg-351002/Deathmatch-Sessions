@@ -41,4 +41,23 @@ public class SessionService : Service<Session, ViewSessionDTO, CreateSessionDTO>
             throw new SessionNotFoundException();
         }
     }
+
+    public async Task<List<ViewUserInSessionDTO>> GetUsersInSession(GetUsersInSessionDTO dto)
+    {
+        try
+        {
+            var session = await _repository.Get(Guid.Parse(dto.SessionId));
+            var entities = await _userInSessionRepository.GetUsersInParticularSession(session);
+            return entities.Select(_mapper.Map<ViewUserInSessionDTO>).ToList();
+                   
+        }
+        catch(ItemNotFoundException)
+        {
+            throw new SessionNotFoundException();
+        }
+        catch(NoElementsException)
+        {
+            throw new NoUsersException();
+        }
+    }
 }

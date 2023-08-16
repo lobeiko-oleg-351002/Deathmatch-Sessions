@@ -1,6 +1,4 @@
-﻿using Application.Locations.DTO;
-using Application.Locations.Interfaces;
-using Application.Sessions.DTO;
+﻿using Application.Sessions.DTO;
 using Application.Sessions.Interfaces;
 using MediatR;
 

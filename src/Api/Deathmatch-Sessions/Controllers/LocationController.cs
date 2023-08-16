@@ -22,8 +22,6 @@ public class LocationController : ControllerBase
         await _mediator.Send(cmd);
     }
 
-
-    //  [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
