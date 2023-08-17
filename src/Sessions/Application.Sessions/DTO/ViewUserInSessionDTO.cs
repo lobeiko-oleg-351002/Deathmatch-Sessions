@@ -2,7 +2,7 @@
 
 namespace Application.Sessions.DTO;
 
-public record ViewUserInSessionDTO : ViewDTO
+public record ViewUserInSessionDTO : ResponseDTO
 {
     public required string UserId { get; set; }
 

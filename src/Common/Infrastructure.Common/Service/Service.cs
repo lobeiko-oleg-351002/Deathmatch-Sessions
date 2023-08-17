@@ -9,8 +9,8 @@ namespace Infrastructure.Common.Service;
 
 public class Service<TEntity, UEntity, YEntity> : IService<UEntity, YEntity>
      where TEntity : BaseEntity
-     where UEntity : ViewDTO
-     where YEntity : CreateDTO
+     where UEntity : ResponseDTO
+     where YEntity : RequestDTO
 {
     protected readonly IRepository<TEntity> _repository;
     protected readonly IMapper _mapper;
@@ -22,7 +22,8 @@ public class Service<TEntity, UEntity, YEntity> : IService<UEntity, YEntity>
 
     public virtual async Task<UEntity> Create(YEntity dto)
     {
-        return _mapper.Map<UEntity>(await _repository.Create(_mapper.Map<TEntity>(dto)));
+        var entity = await _repository.Create(_mapper.Map<TEntity>(dto));
+        return _mapper.Map<UEntity>(entity);
     }
 
     public virtual async Task Delete(string id)

@@ -2,7 +2,7 @@
 
 namespace Application.Sessions.DTO;
 
-public record CreateSessionDTO : CreateDTO
+public record CreateSessionDTO : RequestDTO
 {
     public required string Name { get; set; }
 

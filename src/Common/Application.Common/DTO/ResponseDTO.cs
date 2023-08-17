@@ -1,6 +1,6 @@
 ﻿namespace Application.Common.DTO;
 
-public abstract record ViewDTO
+public abstract record ResponseDTO
 {
     public required string Id { get; set; }
 }

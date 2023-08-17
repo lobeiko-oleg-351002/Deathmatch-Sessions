@@ -2,7 +2,7 @@
 using Application.Sessions.Interfaces;
 using MediatR;
 
-namespace Application.Locations.Queries;
+namespace Application.Sessions.Queries;
 public class GetAllSessionsQuery : IRequest<IList<ViewSessionDTO>>
 {
 }

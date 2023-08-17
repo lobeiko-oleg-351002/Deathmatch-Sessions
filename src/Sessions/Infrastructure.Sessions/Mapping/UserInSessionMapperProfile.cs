@@ -4,7 +4,7 @@ using Application.Sessions.Queries;
 using AutoMapper;
 using Domain.Entities;
 
-namespace Infrastructure.Locations.Mapping;
+namespace Infrastructure.Sessions.Mapping;
 
 public class UserInSessionMapperProfile : Profile
 {
@@ -12,7 +12,7 @@ public class UserInSessionMapperProfile : Profile
     {
         CreateMap<UserInSession, ViewUserInSessionDTO>()
             .ForMember(dto => dto.Id, entity => entity.MapFrom(x => x.Id.ToString()));
-        CreateMap<AddUserToSessionCommand, AddUserToSessionDTO>().ForMember(x => x.Id, opt => opt.Ignore());
+        CreateMap<AddUserToSessionCommand, AddUserToSessionDTO>();
         CreateMap<GetUsersInSessionQuery, GetUsersInSessionDTO>();
     }
 }

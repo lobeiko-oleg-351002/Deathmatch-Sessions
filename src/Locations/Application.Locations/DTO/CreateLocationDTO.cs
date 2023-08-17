@@ -2,7 +2,7 @@
 
 namespace Application.Locations.DTO;
 
-public record CreateLocationDTO : CreateDTO
+public record CreateLocationDTO : RequestDTO
 {
     public required string Name { get; set; }
     public required string LevelFilepath { get; set; }

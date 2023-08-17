@@ -3,8 +3,8 @@
 namespace Application.Common.Interface;
 
 public interface IService<TEntity, UEntity>
-    where TEntity : ViewDTO
-    where UEntity : CreateDTO
+    where TEntity : ResponseDTO
+    where UEntity : RequestDTO
 {
     Task<TEntity> Create(UEntity entity);
 

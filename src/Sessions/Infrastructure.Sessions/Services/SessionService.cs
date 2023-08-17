@@ -6,7 +6,6 @@ using Application.Sessions.Interfaces;
 using Domain.Entities;
 using Infrastructure.Common.Exceptions;
 using Infrastructure.Sessions.Exceptions;
-using Application.Locations.Interfaces;
 
 namespace Infrastructure.Sessions.Services;
 
