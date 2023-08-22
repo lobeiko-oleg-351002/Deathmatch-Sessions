@@ -59,7 +59,7 @@ public class LocationMappingUnitTests
     [Theory, MemberData(nameof(LocationEntitiesComplete))]
     public void LocationMapper_ConvertToViewDTO_SuccessFieldConverting(Location entity)
     {
-        var expected = new ViewLocationDTO { Id = entity.Id.ToString(), Name = entity.Name };
+        var expected = new ViewLocationDTO { Id = entity.Id, Name = entity.Name };
         var actual = _mapper.Map<ViewLocationDTO>(entity);
 
         Assert.Equal(expected.Name, actual.Name);

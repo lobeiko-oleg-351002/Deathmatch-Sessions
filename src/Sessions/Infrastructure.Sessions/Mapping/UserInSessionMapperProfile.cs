@@ -10,8 +10,7 @@ public class UserInSessionMapperProfile : Profile
 {
     public UserInSessionMapperProfile()
     {
-        CreateMap<UserInSession, ViewUserInSessionDTO>()
-            .ForMember(dto => dto.Id, entity => entity.MapFrom(x => x.Id.ToString()));
+        CreateMap<UserInSession, ViewUserInSessionDTO>();
         CreateMap<AddUserToSessionCommand, AddUserToSessionDTO>();
         CreateMap<GetUsersInSessionQuery, GetUsersInSessionDTO>();
     }

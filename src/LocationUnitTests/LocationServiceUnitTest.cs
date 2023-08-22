@@ -20,7 +20,7 @@ public class LocationServiceUnitTest
     public async void LocationService_Create_Success()
     {
         var createDTO = new CreateLocationDTO { Name = "Facing Worlds", LevelFilepath = "levels/face.utm", PosterFilepath = "posters/face.png" };
-        var expected = new ViewLocationDTO() { Id = new Guid().ToString(), Name = createDTO.Name };
+        var expected = new ViewLocationDTO() { Id = new Guid(), Name = createDTO.Name };
 
         var entity = _mapper.Map<Location>(createDTO);
 

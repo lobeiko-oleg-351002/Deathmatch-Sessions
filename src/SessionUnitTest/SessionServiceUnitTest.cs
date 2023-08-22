@@ -20,11 +20,11 @@ public class SessionServiceUnitTest
     [Fact]
     public async void SessionService_Create_Success()
     {
-        var createDTO = new CreateSessionDTO { MaxPlayerCount = 4, Name = "oleg", UserHostId = "13d54b8e-2c1f-4e35-49fb-08db94cbee6d", LevelId = "13d54b8e-2c1f-4e35-49fb-08db94cbee6d" };
-        var expected = new ViewSessionDTO() { Id = new Guid().ToString(), Name = createDTO.Name };
+        var createDTO = new CreateSessionDTO { MaxPlayerCount = 4, Name = "oleg", UserHostId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d"), LevelId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d") };
+        var expected = new ViewSessionDTO() { Id = new Guid(), Name = createDTO.Name };
 
-        var mockLocation = new Location { Id = Guid.Parse(createDTO.LevelId), Name = "Facing Worlds", LevelFilepath = "levels/face.utm", PosterFilepath = "posters/face.png" };
-        var entity = new Session { Id = Guid.Parse(expected.Id), Level = mockLocation, Name = createDTO.Name, UserHostId = Guid.Parse(createDTO.UserHostId), MaxPlayerCount = createDTO.MaxPlayerCount };
+        var mockLocation = new Location { Id = createDTO.LevelId, Name = "Facing Worlds", LevelFilepath = "levels/face.utm", PosterFilepath = "posters/face.png" };
+        var entity = new Session { Id = expected.Id, Level = mockLocation, Name = createDTO.Name, UserHostId = createDTO.UserHostId, MaxPlayerCount = createDTO.MaxPlayerCount };
 
 
         var mockSessionRepository = new Mock<ISessionRepository>();
@@ -45,7 +45,7 @@ public class SessionServiceUnitTest
     [Fact]
     public async void SessionService_Create_FailedWhenRepositoryReturnsNull()
     {
-        var createDTO = new CreateSessionDTO { MaxPlayerCount = 4, Name = "oleg", UserHostId = "13d54b8e-2c1f-4e35-49fb-08db94cbee6d", LevelId = "13d54b8e-2c1f-4e35-49fb-08db94cbee6d" };
+        var createDTO = new CreateSessionDTO { MaxPlayerCount = 4, Name = "oleg", UserHostId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d"), LevelId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d") };
 
         var mockSessionRepository = new Mock<ISessionRepository>();
         mockSessionRepository.Setup(repository => repository.Create(It.IsAny<Session>()).Result).Throws(new DalCreateException("mock exception"));
@@ -62,20 +62,20 @@ public class SessionServiceUnitTest
     [Fact]
     public async void SessionService_AddUserToSession_Success()
     {
-        var createDTO = new AddUserToSessionDTO { UserId = "13d54b8e-2c1f-4e35-49fb-08db94cbee6d" , SessionId = "24d54b8e-2c1f-4e35-49fb-08db94cbee6d" };
+        var createDTO = new AddUserToSessionDTO { UserId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d") , SessionId = new Guid("24d54b8e-2c1f-4e35-49fb-08db94cbee6d") };
 
         var mockLocation = new Location { Id = new Guid(), Name = "Facing Worlds", LevelFilepath = "levels/face.utm", PosterFilepath = "posters/face.png" };
 
         var mockSessionRepository = new Mock<ISessionRepository>();
-        var mockSession = new Session { Id = Guid.Parse(createDTO.SessionId), Name = "mockSession", MaxPlayerCount = 16, UserHostId = Guid.Parse(createDTO.UserId), Level = mockLocation };
+        var mockSession = new Session { Id = createDTO.SessionId, Name = "mockSession", MaxPlayerCount = 16, UserHostId = createDTO.UserId, Level = mockLocation };
         mockSessionRepository.Setup(repository => repository.Get(It.IsAny<Guid>()).Result).Returns(mockSession);
 
         var mockLocationRepository = new Mock<ILocationRepository>();
 
-        var expected = new ViewUserInSessionDTO() { DeathCount = 0, KillCount = 0, Id = (new Guid()).ToString(), UserId = "13d54b8e-2c1f-4e35-49fb-08db94cbee6d" };
+        var expected = new ViewUserInSessionDTO() { DeathCount = 0, KillCount = 0, Id = new Guid(), UserId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d") };
 
         var mockUserInSessionRepository = new Mock<IUserInSessionRepository>();
-        var mockUserInSession = new UserInSession { UserId = Guid.Parse(expected.UserId), Session = mockSession, DeathCount = 0, KillCount = 0 };
+        var mockUserInSession = new UserInSession { UserId = expected.UserId, Session = mockSession, DeathCount = 0, KillCount = 0 };
         mockUserInSessionRepository.Setup(repository => repository.Create(It.IsAny<UserInSession>()).Result).Returns(mockUserInSession);
 
         ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, _mapper);
@@ -86,7 +86,7 @@ public class SessionServiceUnitTest
     [Fact]
     public async void SessionService_AddUserToSession_FailedOnNonexistingSession()
     {
-        var createDTO = new AddUserToSessionDTO { UserId = "13d54b8e-2c1f-4e35-49fb-08db94cbee6d", SessionId = "24d54b8e-2c1f-4e35-49fb-08db94cbee6d" };
+        var createDTO = new AddUserToSessionDTO { UserId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d"), SessionId = new Guid("24d54b8e-2c1f-4e35-49fb-08db94cbee6d") };
 
         var mockSessionRepository = new Mock<ISessionRepository>();
         Session mockSession = null;
@@ -103,7 +103,7 @@ public class SessionServiceUnitTest
     [Fact]
     public async void SessionService_GetUsersInSession_Success()
     {
-        var getDTO = new GetUsersInSessionDTO { SessionId = "24d54b8e-2c1f-4e35-49fb-08db94cbee6d" };
+        var getDTO = new GetUsersInSessionDTO { SessionId = new Guid("24d54b8e-2c1f-4e35-49fb-08db94cbee6d") };
 
         var mockSessionRepository = new Mock<ISessionRepository>();
         var mockLocation = new Location { Id = new Guid(), Name = "Facing Worlds", LevelFilepath = "levels/face.utm", PosterFilepath = "posters/face.png" };
@@ -118,7 +118,7 @@ public class SessionServiceUnitTest
 
         ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, _mapper);
         var actual = await service.GetUsersInSession(getDTO);
-        mockSessionRepository.Verify(mock => mock.Get(Guid.Parse(getDTO.SessionId)));
+        mockSessionRepository.Verify(mock => mock.Get(getDTO.SessionId));
         mockUserInSessionRepository.Verify(mock => mock.GetUsersInParticularSession(mockSession));
     }
 }

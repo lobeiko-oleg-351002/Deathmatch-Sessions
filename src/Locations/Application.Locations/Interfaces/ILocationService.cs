@@ -5,5 +5,5 @@ namespace Application.Locations.Interfaces;
 
 public interface ILocationService : IService<ViewLocationDTO, CreateLocationDTO>
 {
-
+    Task<ViewLocationDTO> GetByName(string name);
 }

@@ -5,5 +5,4 @@ namespace Application.Locations.DTO;
 public record ViewLocationDTO : ResponseDTO
 {
     public required string Name { get; set; }
-    // public byte[] Poster { get; set; }
 }

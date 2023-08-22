@@ -30,7 +30,7 @@ public class SessionQueryUnitTest
     [Fact]
     public void GetUsersInSessionQuery_Success()
     {
-        var cmd = new GetUsersInSessionQuery { SessionId = "13d54b8e-2c1f-4e35-49fb-08db94cbee6d" };
+        var cmd = new GetUsersInSessionQuery { SessionId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d") };
         var handler = new GetUsersInSessionQueryHandler(_mockSessionService.Object, _mapper);
 
         var result = handler.Handle(cmd, new CancellationToken());

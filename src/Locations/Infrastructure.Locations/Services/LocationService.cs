@@ -15,4 +15,8 @@ public class LocationService : Service<Location, ViewLocationDTO, CreateLocation
 
     }
 
+    public async Task<ViewLocationDTO> GetByName(string name)
+    {
+        return _mapper.Map<ViewLocationDTO>(await ((ILocationRepository)_repository).GetByName(name));
+    }
 }

@@ -11,9 +11,9 @@ public record CreateSessionCommand : IRequest<Unit>
 
     public required int MaxPlayerCount { get; set; }
 
-    public required string LevelId { get; set; }
+    public required Guid LevelId { get; set; }
 
-    public required string UserHostId { get; set; }
+    public required Guid UserHostId { get; set; }
 }
 
 public class CreateSessionCommandHandler : IRequestHandler<CreateSessionCommand, Unit>

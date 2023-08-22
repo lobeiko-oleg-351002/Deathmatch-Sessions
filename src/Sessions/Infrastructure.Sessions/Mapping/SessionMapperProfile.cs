@@ -9,8 +9,7 @@ public class SessionMapperProfile : Profile
 {
     public SessionMapperProfile()
     {
-        CreateMap<Session, ViewSessionDTO>()
-            .ForMember(dto => dto.Id, entity => entity.MapFrom(x => x.Id.ToString()));
+        CreateMap<Session, ViewSessionDTO>();
         CreateMap<CreateSessionCommand, CreateSessionDTO>();
     }
 }

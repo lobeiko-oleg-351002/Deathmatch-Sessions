@@ -7,7 +7,7 @@ namespace Application.Sessions.Queries;
 
 public class GetUsersInSessionQuery : IRequest<IList<ViewUserInSessionDTO>>
 {
-    public required string SessionId { get; set; }
+    public required Guid SessionId { get; set; }
 }
 
 public class GetUsersInSessionQueryHandler : IRequestHandler<GetUsersInSessionQuery, IList<ViewUserInSessionDTO>>

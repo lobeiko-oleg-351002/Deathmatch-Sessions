@@ -22,8 +22,8 @@ public class SessionService : Service<Session, ViewSessionDTO, CreateSessionDTO>
 
     public override async Task<ViewSessionDTO> Create(CreateSessionDTO dto)
     {
-        var location = await _locationRepository.Get(Guid.Parse(dto.LevelId));
-        var entity = new Session { Level = location, Name = dto.Name, UserHostId = Guid.Parse(dto.UserHostId) };
+        var location = await _locationRepository.Get(dto.LevelId);
+        var entity = new Session { Level = location, Name = dto.Name, UserHostId = dto.UserHostId };
         return _mapper.Map<ViewSessionDTO>(await _repository.Create(entity));
     }
 
@@ -31,8 +31,8 @@ public class SessionService : Service<Session, ViewSessionDTO, CreateSessionDTO>
     {
         try
         {
-            var session = await _repository.Get(Guid.Parse(dto.SessionId));
-            var userInSession = await _userInSessionRepository.Create(new UserInSession { UserId = Guid.Parse(dto.UserId), Session = session, DeathCount = 0, KillCount = 0 });
+            var session = await _repository.Get(dto.SessionId);
+            var userInSession = await _userInSessionRepository.Create(new UserInSession { UserId = dto.UserId, Session = session, DeathCount = 0, KillCount = 0 });
             return _mapper.Map<ViewUserInSessionDTO>(userInSession);
         }
         catch (ItemNotFoundException)
@@ -45,7 +45,7 @@ public class SessionService : Service<Session, ViewSessionDTO, CreateSessionDTO>
     {
         try
         {
-            var session = await _repository.Get(Guid.Parse(dto.SessionId));
+            var session = await _repository.Get(dto.SessionId);
             var entities = await _userInSessionRepository.GetUsersInParticularSession(session);
             return entities.Select(_mapper.Map<ViewUserInSessionDTO>).ToList();
                    
