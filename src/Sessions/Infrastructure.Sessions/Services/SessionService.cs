@@ -6,6 +6,8 @@ using Application.Sessions.Interfaces;
 using Domain.Entities;
 using Infrastructure.Common.Exceptions;
 using Infrastructure.Sessions.Exceptions;
+using Application.Sessions.Messages;
+using MicroserviceEvents;
 
 namespace Infrastructure.Sessions.Services;
 
@@ -13,11 +15,18 @@ public class SessionService : Service<Session, ViewSessionDTO, CreateSessionDTO>
 {
     private readonly IUserInSessionRepository _userInSessionRepository;
     private readonly ILocationRepository _locationRepository;
-    public SessionService(ISessionRepository sessionRepository, IUserInSessionRepository userInSessionRepository, ILocationRepository locationRepository, IMapper mapper)
+    private readonly IUserExternalService _userExternalService;
+    public SessionService(
+        ISessionRepository sessionRepository,
+        IUserInSessionRepository userInSessionRepository,
+        ILocationRepository locationRepository,
+        IUserExternalService userExternalService,
+        IMapper mapper)
         : base(sessionRepository, mapper)
     {
         _userInSessionRepository = userInSessionRepository;
         _locationRepository = locationRepository;
+        _userExternalService = userExternalService;
     }
 
     public override async Task<ViewSessionDTO> Create(CreateSessionDTO dto)
@@ -55,6 +64,28 @@ public class SessionService : Service<Session, ViewSessionDTO, CreateSessionDTO>
             throw new SessionNotFoundException();
         }
         catch(NoElementsException)
+        {
+            throw new NoUsersException();
+        }
+    }
+
+    public async override Task<ViewSessionDTO> Get(Guid id)
+    {
+        try
+        {
+            var session = await _repository.Get(id);
+            var userRequest = new UserRequestEvent { User = session.UserHostId };
+            var host = await _userExternalService.GetUser(session.UserHostId);
+            var result = _mapper.Map<ViewSessionDTO>(session);
+            result.HostName = host.Name;
+            return result;
+
+        }
+        catch (ItemNotFoundException)
+        {
+            throw new SessionNotFoundException();
+        }
+        catch (NoElementsException)
         {
             throw new NoUsersException();
         }

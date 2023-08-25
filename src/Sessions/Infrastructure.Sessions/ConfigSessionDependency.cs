@@ -5,6 +5,7 @@ using Infrastructure.Sessions.Services;
 using Domain.Interfaces;
 using Domain.Entities;
 using Infrastructure.Common.Repository;
+using Application.Sessions.Messages;
 
 namespace Infrastructure.Sessions;
 
@@ -19,6 +20,11 @@ public static class ConfigSessionDependency
 
         services.AddScoped<ILogMessageManager<UserInSession>, LogMessageManager<UserInSession>>();
         services.AddScoped<IUserInSessionRepository, UserInSessionRepository>();
+        services.AddScoped<IUserExternalService, UserExternalService>();
+
+        services.AddScoped<IMessageProducer, RabbitMQProducer>();
+
+        services.AddHttpClient();
 
         return services;
     }

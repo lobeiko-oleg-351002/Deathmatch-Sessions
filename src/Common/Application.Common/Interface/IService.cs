@@ -10,11 +10,11 @@ public interface IService<TEntity, UEntity>
 
     Task<List<TEntity>> GetAll();
 
-    Task<TEntity> Get(string id);
+    Task<TEntity> Get(Guid id);
 
-    Task Delete(string id);
+    Task Delete(Guid id);
 
     Task Update(UEntity entity);
 
-    public string GetKey(string id);
+    public string GetKey(Guid id);
 }

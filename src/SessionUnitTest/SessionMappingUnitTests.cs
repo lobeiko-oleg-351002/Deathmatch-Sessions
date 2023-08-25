@@ -60,7 +60,7 @@ public class SessionMappingUnitTests
     [Theory, MemberData(nameof(SessionEntitiesComplete))]
     public void SessionMapper_ConvertToViewDTO_SuccessFieldConverting(Session entity)
     {
-        var expected = new ViewSessionDTO { Id = entity.Id, Name = entity.Name };
+        var expected = new ViewSessionDTO { Id = entity.Id, Name = entity.Name, HostName = "host" };
         var actual = _mapper.Map<ViewSessionDTO>(entity);
 
         Assert.Equal(expected.Name, actual.Name);

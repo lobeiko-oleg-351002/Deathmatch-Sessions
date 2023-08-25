@@ -42,4 +42,11 @@ public class SessionController : ControllerBase
         var result = await _mediator.Send(cmd);
         return Ok(result);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Get([FromQuery] GetSessionQuery cmd)
+    {
+        var result = await _mediator.Send(cmd);
+        return Ok(result);
+    }
 }

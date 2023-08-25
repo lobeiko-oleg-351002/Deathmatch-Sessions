@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MicroserviceEvents" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Common\Domain\Domain.csproj" />
     <ProjectReference Include="..\..\Common\Infrastructure.Common\Infrastructure.Common.csproj" />
     <ProjectReference Include="..\Application.Sessions\Application.Sessions.csproj" />

@@ -36,8 +36,9 @@ public class SessionServiceUnitTest
 
         var mockUserInSessionRepository = new Mock<IUserInSessionRepository>();
 
+        var mockExternalUserService = new Mock<IUserExternalService>();
 
-        ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, _mapper);
+        ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, mockExternalUserService.Object, _mapper);
         var actual = await service.Create(createDTO);
         Assert.Equal(expected, actual);
     }
@@ -54,8 +55,9 @@ public class SessionServiceUnitTest
 
         var mockUserInSessionRepository = new Mock<IUserInSessionRepository>();
 
+        var mockExternalUserService = new Mock<IUserExternalService>();
 
-        ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, _mapper);
+        ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, mockExternalUserService.Object, _mapper);
         await Assert.ThrowsAsync<DalCreateException>(async () => await service.Create(createDTO));
     }
 
@@ -78,7 +80,9 @@ public class SessionServiceUnitTest
         var mockUserInSession = new UserInSession { UserId = expected.UserId, Session = mockSession, DeathCount = 0, KillCount = 0 };
         mockUserInSessionRepository.Setup(repository => repository.Create(It.IsAny<UserInSession>()).Result).Returns(mockUserInSession);
 
-        ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, _mapper);
+        var mockExternalUserService = new Mock<IUserExternalService>();
+
+        ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, mockExternalUserService.Object, _mapper);
         var actual = await service.AddUserToSession(createDTO);
         Assert.Equal(expected, actual);
     }
@@ -96,7 +100,9 @@ public class SessionServiceUnitTest
 
         var mockUserInSessionRepository = new Mock<IUserInSessionRepository>();
 
-        ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, _mapper);
+        var mockExternalUserService = new Mock<IUserExternalService>();
+
+        ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, mockExternalUserService.Object, _mapper);
         await Assert.ThrowsAsync<SessionNotFoundException>(async () => await service.AddUserToSession(createDTO));
     }
 
@@ -116,7 +122,9 @@ public class SessionServiceUnitTest
         var mockUserInSession = new UserInSession { DeathCount = 1, KillCount = 0, Session = mockSession, UserId = new Guid() };
         mockUserInSessionRepository.Setup(repository => repository.GetUsersInParticularSession(mockSession).Result).Returns(new List<UserInSession> { mockUserInSession });
 
-        ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, _mapper);
+        var mockExternalUserService = new Mock<IUserExternalService>();
+
+        ISessionService service = new SessionService(mockSessionRepository.Object, mockUserInSessionRepository.Object, mockLocationRepository.Object, mockExternalUserService.Object, _mapper);
         var actual = await service.GetUsersInSession(getDTO);
         mockSessionRepository.Verify(mock => mock.Get(getDTO.SessionId));
         mockUserInSessionRepository.Verify(mock => mock.GetUsersInParticularSession(mockSession));

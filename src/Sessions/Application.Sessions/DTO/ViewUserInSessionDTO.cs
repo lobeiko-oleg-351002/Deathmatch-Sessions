@@ -4,7 +4,8 @@ namespace Application.Sessions.DTO;
 
 public record ViewUserInSessionDTO : ResponseDTO
 {
-    public required Guid UserId { get; set; }
+    public Guid UserId { get; set; }
+    public string Name { get; set; }
 
     public int KillCount { get; set; }
     public int DeathCount { get; set; }
