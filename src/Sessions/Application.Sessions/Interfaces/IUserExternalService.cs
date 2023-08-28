@@ -1,9 +1,8 @@
-﻿using Application.Sessions.DTO;
+﻿using Application.Profiles.DTO;
 
-namespace Application.Sessions.Interfaces
+namespace Application.Sessions.Interfaces;
+
+public interface IUserExternalService
 {
-    public interface IUserExternalService
-    {
-        Task<ViewUserDTO> GetUser(Guid id);
-    }
+    Task<ViewPlayerProfileDTO> GetUser(Guid id);
 }

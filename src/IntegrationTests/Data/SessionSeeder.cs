@@ -1,8 +1,9 @@
 ﻿using Domain.Entities;
 using Infrastructure.Common;
+using IntegrationTests.Data.Interface;
 
 namespace IntegrationTests.Data;
-public class SessionSeeder : SeederBase<ApplicationDbContext, List<Session>>
+public class SessionSeeder : SeederBase<ApplicationDbContext>, ISessionSeeder
 {
     public SessionSeeder(ApplicationDbContext dbContext) : base(dbContext)
     {

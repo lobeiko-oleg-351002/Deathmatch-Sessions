@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Application.Profiles\Application.PlayerProfiles.csproj" />
     <ProjectReference Include="..\..\Common\Application.Common\Application.Common.csproj" />
     <ProjectReference Include="..\..\Locations\Application.Locations\Application.Locations.csproj" />
   </ItemGroup>

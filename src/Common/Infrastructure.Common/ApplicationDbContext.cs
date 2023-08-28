@@ -12,5 +12,6 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Location> Locations { get; set; }
     public DbSet<Session> Sessions { get; set; }
-    public DbSet<UserInSession> UsersInSession { get; set; }
+    public DbSet<PlayerProfileInSession> ProfilesInSession { get; set; }
+    public DbSet<PlayerProfile> PlayerProfiles { get; set; }
 }

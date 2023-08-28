@@ -2,9 +2,9 @@
 
 namespace Application.Sessions.DTO
 {
-    public record AddUserToSessionDTO : RequestDTO
+    public record AddPlayerProfileToSessionDTO : RequestDTO
     {
-        public required Guid UserId { get; set; }
+        public required Guid ProfileId { get; set; }
 
         public required Guid SessionId { get; set; }
     }

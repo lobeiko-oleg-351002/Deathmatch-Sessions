@@ -45,7 +45,7 @@ public class SessionMappingUnitTests
         {
             return new[]
             {
-                new object[] { new AddUserToSessionCommand { UserId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d"), SessionId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d")  } },               
+                new object[] { new AddProfileToSessionCommand { ProfileId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d"), SessionId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d")  } },               
             };
         }
     }
@@ -80,10 +80,10 @@ public class SessionMappingUnitTests
     }
 
     [Theory, MemberData(nameof(AddUserToSessionCommandsComplete))]
-    public void SessionMapper_AddUserToSessionCommandToDTO_SuccessFieldConverting(AddUserToSessionCommand requestDTO)
+    public void SessionMapper_AddUserToSessionCommandToDTO_SuccessFieldConverting(AddProfileToSessionCommand requestDTO)
     {
-        var expected = new AddUserToSessionDTO { UserId = requestDTO.UserId, SessionId = requestDTO.SessionId };
-        var actual = _mapper.Map<AddUserToSessionDTO>(requestDTO);
+        var expected = new AddPlayerProfileToSessionDTO { ProfileId = requestDTO.ProfileId, SessionId = requestDTO.SessionId };
+        var actual = _mapper.Map<AddPlayerProfileToSessionDTO>(requestDTO);
 
         Assert.Equal(expected, actual);
     }

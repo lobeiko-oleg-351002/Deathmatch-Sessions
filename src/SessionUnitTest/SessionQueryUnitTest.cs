@@ -28,14 +28,14 @@ public class SessionQueryUnitTest
     }
 
     [Fact]
-    public void GetUsersInSessionQuery_Success()
+    public void GetPlayerProfilesInSessionQuery_Success()
     {
-        var cmd = new GetUsersInSessionQuery { SessionId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d") };
-        var handler = new GetUsersInSessionQueryHandler(_mockSessionService.Object, _mapper);
+        var cmd = new GetPlayerProfilesInSessionQuery { SessionId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d") };
+        var handler = new GetPlayerProfilesInSessionQueryHandler(_mockSessionService.Object, _mapper);
 
         var result = handler.Handle(cmd, new CancellationToken());
 
         Assert.NotNull(result);
-        _mockSessionService.Verify(mock => mock.GetUsersInSession(_mapper.Map<GetUsersInSessionDTO>(cmd)));
+        _mockSessionService.Verify(mock => mock.GetProfilesInSession(_mapper.Map<GetPlayerProfilesInSessionDTO>(cmd)));
     }
 }

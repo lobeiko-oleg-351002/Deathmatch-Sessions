@@ -1,8 +1,9 @@
 ﻿using Domain.Entities;
 using Infrastructure.Common;
+using IntegrationTests.Data.Interface;
 
 namespace IntegrationTests.Data;
-public class LocationSeeder : SeederBase<ApplicationDbContext, List<Location>>
+public class LocationSeeder : SeederBase<ApplicationDbContext>, ILocationSeeder
 {
     public LocationSeeder(ApplicationDbContext dbContext) : base(dbContext)
     {

@@ -1,4 +1,5 @@
-﻿using Application.Sessions.DTO;
+﻿using Application.Profiles.DTO;
+using Application.Sessions.DTO;
 using Application.Sessions.Interfaces;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -12,14 +13,14 @@ public class UserExternalService : IUserExternalService
     {
         _httpClientFactory = httpClientFactory;
     }  
-    public async Task<ViewUserDTO> GetUser(Guid id)
+    public async Task<ViewPlayerProfileDTO> GetUser(Guid id)
     {
 
         using (var client = _httpClientFactory?.CreateClient())
         {
-            var result = await client.GetAsync("https://localhost:7227/User/Get" + $"?Id={id}");
+            var result = await client.GetAsync("https://localhost:7227/user/" + $"{id}");
             var content = await result.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ViewUserDTO>(content);
+            return JsonConvert.DeserializeObject<ViewPlayerProfileDTO>(content);
         }
     }
 }

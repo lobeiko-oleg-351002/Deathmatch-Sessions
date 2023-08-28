@@ -10,7 +10,7 @@ public class MappingConfigForTests
         return new MapperConfiguration(cfg =>
         {
             cfg.AddProfile<SessionMapperProfile>(); 
-            cfg.AddProfile<UserInSessionMapperProfile>();
+            cfg.AddProfile<ProfileInSessionMapperProfile>();
         });
     }
 

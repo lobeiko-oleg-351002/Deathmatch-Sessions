@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Application.Controllers;
 
 [ApiController]
-[Route("[controller]/[action]")]
 public class SessionController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -18,12 +17,14 @@ public class SessionController : ControllerBase
     }
 
     [HttpPost]
+    [Route("session")]
     public async Task CreateSession([FromForm] CreateSessionCommand cmd)
     {
         await _mediator.Send(cmd);
     }
 
     [HttpGet]
+    [Route("sessions")]
     public async Task<IActionResult> GetAll()
     {
         var result = await _mediator.Send(new GetAllSessionsQuery());
@@ -31,22 +32,25 @@ public class SessionController : ControllerBase
     }
 
     [HttpPost]
-    public async Task AddUserToSession([FromForm] AddUserToSessionCommand cmd)
+    [Route("sessions/user")]
+    public async Task AddUserToSession([FromForm] AddProfileToSessionCommand cmd)
     {
         await _mediator.Send(cmd);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetUsersInSession([FromQuery] GetUsersInSessionQuery cmd)
+    [Route("sessions/user/{id}")]
+    public async Task<IActionResult> GetUsersInSession(Guid id)
     {
-        var result = await _mediator.Send(cmd);
+        var result = await _mediator.Send(new GetPlayerProfilesInSessionQuery { SessionId = id });
         return Ok(result);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] GetSessionQuery cmd)
+    [Route("session/{id}")]
+    public async Task<IActionResult> Get(Guid id)
     {
-        var result = await _mediator.Send(cmd);
+        var result = await _mediator.Send(new GetSessionQuery { Id = id });
         return Ok(result);
     }
 }

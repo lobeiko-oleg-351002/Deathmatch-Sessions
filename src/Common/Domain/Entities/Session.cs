@@ -16,5 +16,5 @@ public class Session : BaseEntity
     [Required]
     public required Guid UserHostId { get; set; }
 
-    public virtual List<UserInSession> UsersInSession { get; set; }
+    public virtual List<PlayerProfileInSession> UsersInSession { get; set; }
 }

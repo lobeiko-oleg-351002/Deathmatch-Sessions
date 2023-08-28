@@ -2,10 +2,10 @@
 
 namespace Domain.Entities;
 
-public class UserInSession : BaseEntity
+public class PlayerProfileInSession : BaseEntity
 {
     [Required]
-    public required Guid UserId { get; set; }
+    public virtual required PlayerProfile PlayerProfile { get; set; }
     [Required]
     public virtual required Session Session { get; set; }
     [Required]

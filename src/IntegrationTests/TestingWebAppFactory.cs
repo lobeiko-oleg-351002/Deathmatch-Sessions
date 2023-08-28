@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Common;
 using IntegrationTests.Data;
+using IntegrationTests.Data.Interface;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -17,8 +18,9 @@ public class TestingWebAppFactory<TEntryPoint> : WebApplicationFactory<Program> 
                     typeof(DbContextOptions<ApplicationDbContext>));
             if (descriptor != null)
                 services.Remove(descriptor);
-            services.AddScoped<ISeeder, LocationSeeder>();
-            services.AddScoped<ISeeder, SessionSeeder>();
+            services.AddScoped<ILocationSeeder, LocationSeeder>();
+            services.AddScoped<ISessionSeeder, SessionSeeder>();
+            services.AddScoped<IPlayerProfileSeeder, PlayerProfileSeeder>();
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseInMemoryDatabase("InMemoryUserTest");
@@ -27,14 +29,15 @@ public class TestingWebAppFactory<TEntryPoint> : WebApplicationFactory<Program> 
             using (var scope = sp.CreateScope())
             using (var appContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
             {
-                var seeder = scope.ServiceProvider.GetRequiredService<ISeeder>();
+                appContext.Database.EnsureCreated();
+                var locationSeeder = scope.ServiceProvider.GetRequiredService<ILocationSeeder>();
+                var sessionSeeder = scope.ServiceProvider.GetRequiredService<ISessionSeeder>();
+                var playerProfileSeeder = scope.ServiceProvider.GetRequiredService<IPlayerProfileSeeder>();
                 try
                 {
-                    if (!appContext.Database.EnsureCreated())
-                    {
-                        seeder.Execute();
-                    }
-                    
+                    locationSeeder.Execute();
+                    sessionSeeder.Execute();
+                    playerProfileSeeder.Execute();
                 }
                 catch (Exception ex)
                 {

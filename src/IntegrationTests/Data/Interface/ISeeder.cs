@@ -1,4 +1,4 @@
-﻿namespace IntegrationTests.Data;
+﻿namespace IntegrationTests.Data.Interface;
 
 public interface ISeeder
 {

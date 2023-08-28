@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application.Profiles\Application.PlayerProfiles.csproj" />
     <ProjectReference Include="..\Sessions\Infrastructure.Sessions\Infrastructure.Sessions.csproj" />
   </ItemGroup>
 

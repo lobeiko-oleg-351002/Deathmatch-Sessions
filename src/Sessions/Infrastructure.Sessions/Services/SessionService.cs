@@ -13,13 +13,15 @@ namespace Infrastructure.Sessions.Services;
 
 public class SessionService : Service<Session, ViewSessionDTO, CreateSessionDTO>, ISessionService
 {
-    private readonly IUserInSessionRepository _userInSessionRepository;
+    private readonly IPlayerProfileInSessionRepository _userInSessionRepository;
     private readonly ILocationRepository _locationRepository;
+    private readonly IPlayerProfileRepository _playerProfileRepository;
     private readonly IUserExternalService _userExternalService;
     public SessionService(
         ISessionRepository sessionRepository,
-        IUserInSessionRepository userInSessionRepository,
+        IPlayerProfileInSessionRepository userInSessionRepository,
         ILocationRepository locationRepository,
+        IPlayerProfileRepository playerProfileRepository,
         IUserExternalService userExternalService,
         IMapper mapper)
         : base(sessionRepository, mapper)
@@ -27,6 +29,7 @@ public class SessionService : Service<Session, ViewSessionDTO, CreateSessionDTO>
         _userInSessionRepository = userInSessionRepository;
         _locationRepository = locationRepository;
         _userExternalService = userExternalService;
+        _playerProfileRepository = playerProfileRepository;
     }
 
     public override async Task<ViewSessionDTO> Create(CreateSessionDTO dto)
@@ -36,13 +39,14 @@ public class SessionService : Service<Session, ViewSessionDTO, CreateSessionDTO>
         return _mapper.Map<ViewSessionDTO>(await _repository.Create(entity));
     }
 
-    public async Task<ViewUserInSessionDTO> AddUserToSession(AddUserToSessionDTO dto)
+    public async Task<ViewProfileInSessionDTO> AddProfileToSession(AddPlayerProfileToSessionDTO dto)
     {
         try
         {
             var session = await _repository.Get(dto.SessionId);
-            var userInSession = await _userInSessionRepository.Create(new UserInSession { UserId = dto.UserId, Session = session, DeathCount = 0, KillCount = 0 });
-            return _mapper.Map<ViewUserInSessionDTO>(userInSession);
+            var playerProfile = await _playerProfileRepository.Get(dto.ProfileId);
+            var userInSession = await _userInSessionRepository.Create(new PlayerProfileInSession { Id = dto.ProfileId, Session = session, DeathCount = 0, KillCount = 0, PlayerProfile = playerProfile });
+            return _mapper.Map<ViewProfileInSessionDTO>(userInSession);
         }
         catch (ItemNotFoundException)
         {
@@ -50,13 +54,13 @@ public class SessionService : Service<Session, ViewSessionDTO, CreateSessionDTO>
         }
     }
 
-    public async Task<List<ViewUserInSessionDTO>> GetUsersInSession(GetUsersInSessionDTO dto)
+    public async Task<List<ViewProfileInSessionDTO>> GetProfilesInSession(GetPlayerProfilesInSessionDTO dto)
     {
         try
         {
             var session = await _repository.Get(dto.SessionId);
-            var entities = await _userInSessionRepository.GetUsersInParticularSession(session);
-            return entities.Select(_mapper.Map<ViewUserInSessionDTO>).ToList();
+            var entities = await _userInSessionRepository.GetProfilesInParticularSession(session);
+            return entities.Select(_mapper.Map<ViewProfileInSessionDTO>).ToList();
                    
         }
         catch(ItemNotFoundException)

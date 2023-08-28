@@ -24,7 +24,7 @@ public class LocationControllerIntegrationTest : IClassFixture<TestingWebAppFact
     [Theory, MemberData(nameof(LocationCreateCommands))]
     public async Task CreateLocation_Success(CreateLocationCommand cmd)
     {
-        var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Location/CreateLocation");
+        var postRequest = new HttpRequestMessage(HttpMethod.Post, "/location");
 
         var cmdDictionary = ToDictionary<string>(cmd);
 

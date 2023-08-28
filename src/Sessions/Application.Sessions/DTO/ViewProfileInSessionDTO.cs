@@ -2,9 +2,8 @@
 
 namespace Application.Sessions.DTO;
 
-public record ViewUserInSessionDTO : ResponseDTO
+public record ViewProfileInSessionDTO : ResponseDTO
 {
-    public Guid UserId { get; set; }
     public string Name { get; set; }
 
     public int KillCount { get; set; }

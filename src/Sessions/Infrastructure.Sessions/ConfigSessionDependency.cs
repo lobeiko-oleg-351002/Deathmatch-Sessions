@@ -18,11 +18,13 @@ public static class ConfigSessionDependency
         services.AddScoped<ISessionRepository, SessionRepository>();
         services.AddScoped<ISessionService, SessionService>();
 
-        services.AddScoped<ILogMessageManager<UserInSession>, LogMessageManager<UserInSession>>();
-        services.AddScoped<IUserInSessionRepository, UserInSessionRepository>();
-        services.AddScoped<IUserExternalService, UserExternalService>();
+        services.AddScoped<ILogMessageManager<PlayerProfile>, LogMessageManager<PlayerProfile>>();
+        services.AddScoped<IPlayerProfileRepository, PlayerProfileRepository>();
 
-        services.AddScoped<IMessageProducer, RabbitMQProducer>();
+        services.AddScoped<ILogMessageManager<PlayerProfileInSession>, LogMessageManager<PlayerProfileInSession>>();
+        services.AddScoped<IPlayerProfileInSessionRepository, PlayerProfileInSessionRepository>();
+
+        services.AddScoped<IUserExternalService, UserExternalService>();
 
         services.AddHttpClient();
 

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Application.Controllers;
 
 [ApiController]
-[Route("[controller]/[action]")]
 public class LocationController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -17,12 +16,14 @@ public class LocationController : ControllerBase
     }
 
     [HttpPost]
+    [Route("location")]
     public async Task CreateLocation([FromForm] CreateLocationCommand cmd)
     {
         await _mediator.Send(cmd);
     }
 
     [HttpGet]
+    [Route("locations")]
     public async Task<IActionResult> GetAll()
     {
         var result = await _mediator.Send(new GetAllLocationsQuery());

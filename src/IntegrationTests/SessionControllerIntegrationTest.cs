@@ -27,7 +27,7 @@ public class SessionControllerIntegrationTest : IClassFixture<TestingWebAppFacto
         {
             return new[]
             {
-                new object[] { new AddUserToSessionCommand { UserId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d"), SessionId = new Guid("24d54b8e-2c1f-4e35-49fb-08db94cbee6d") } },
+                new object[] { new AddProfileToSessionCommand { ProfileId = new Guid("13d54b8e-2c1f-4e35-49fb-08db94cbee6d"), SessionId = new Guid("24d54b8e-2c1f-4e35-49fb-08db94cbee6d") } },
             };
         }
     }
@@ -35,7 +35,7 @@ public class SessionControllerIntegrationTest : IClassFixture<TestingWebAppFacto
     [Theory, MemberData(nameof(SessionCreateCommands))]
     public async Task CreateSession_Success(CreateSessionCommand cmd)
     {
-        var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Session/CreateSession");
+        var postRequest = new HttpRequestMessage(HttpMethod.Post, "/session");
 
         var cmdDictionary = ToDictionary<string>(cmd);
 
@@ -47,9 +47,9 @@ public class SessionControllerIntegrationTest : IClassFixture<TestingWebAppFacto
     }
 
     [Theory, MemberData(nameof(AddUserToSessionCommands))]
-    public async Task AddUserToSession_Success(AddUserToSessionCommand cmd)
+    public async Task AddUserToSession_Success(AddProfileToSessionCommand cmd)
     {
-        var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Session/AddUserToSession");
+        var postRequest = new HttpRequestMessage(HttpMethod.Post, "/sessions/user");
 
         var cmdDictionary = ToDictionary<string>(cmd);
 

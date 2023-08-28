@@ -14,6 +14,6 @@ public class SessionRepository : Repository<Session>, ISessionRepository
 
     public async Task<int> GetCurrentPlayerCountInSession(Guid sessionId)
     {
-        return await _context.UsersInSession.CountAsync(userInSession => userInSession.Session.Id == sessionId); 
+        return await _context.ProfilesInSession.CountAsync(userInSession => userInSession.Session.Id == sessionId); 
     }
 }
