@@ -1,6 +1,6 @@
 ﻿using Application.Common.DTO;
 
-namespace Application.Profiles.DTO;
+namespace Application.PlayerProfiles.DTO;
 
 public record CreatePlayerProfileDTO : RequestDTO
 {

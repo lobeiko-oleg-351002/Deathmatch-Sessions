@@ -1,7 +1,7 @@
 ﻿using Application.Common.Interface;
-using Application.Profiles.DTO;
+using Application.PlayerProfiles.DTO;
 
-namespace Application.Profiles.Interfaces;
+namespace Application.PlayerProfiles.Interfaces;
 
 public interface IPlayerProfileService : IService<ViewPlayerProfileDTO, CreatePlayerProfileDTO>
 {

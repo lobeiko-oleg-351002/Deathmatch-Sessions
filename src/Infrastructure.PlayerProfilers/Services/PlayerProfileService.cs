@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Infrastructure.Common.Service;
 using Domain.Entities;
-using Application.Profiles.DTO;
+using Application.PlayerProfiles.DTO;
 using Domain.Interfaces;
-using Application.Profiles.Interfaces;
+using Application.PlayerProfiles.Interfaces;
 
 namespace Infrastructure.PlayerProfiles.Services;
 

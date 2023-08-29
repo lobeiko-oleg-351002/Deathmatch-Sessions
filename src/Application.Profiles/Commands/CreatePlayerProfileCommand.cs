@@ -1,14 +1,13 @@
-﻿using Application.Profiles.DTO;
-using Application.Profiles.Interfaces;
+﻿using Application.PlayerProfiles.DTO;
+using Application.PlayerProfiles.Interfaces;
 using AutoMapper;
 using MediatR;
 
-namespace Application.Profiles.Commands;
+namespace Application.PlayerProfiles.Commands;
 public record CreatePlayerProfileCommand : IRequest<Unit>
 {
     public required string Name { get; set; }
-    public required string LevelFilepath { get; set; }
-    public required string PosterFilepath { get; set; }
+    public required Guid UserId { get; set; }
 }
 
 public class CreatePlayerProfileCommandHandler : IRequestHandler<CreatePlayerProfileCommand, Unit>

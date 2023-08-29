@@ -1,4 +1,4 @@
-﻿using Application.Profiles.DTO;
+﻿using Application.PlayerProfiles.DTO;
 
 namespace Application.Sessions.Interfaces;
 

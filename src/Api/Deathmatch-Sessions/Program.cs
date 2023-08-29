@@ -3,6 +3,8 @@ using Infrastructure.Locations;
 using Infrastructure.Common;
 using Application.Sessions;
 using Infrastructure.Sessions;
+using Application.PlayerProfiles;
+using Infrastructure.PlayerProfiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,8 @@ services.RegisterLocationDependencies();
 services.RegisterLocationHandlers();
 services.RegisterSessionDependencies();
 services.RegisterSessionHandlers();
-
+services.RegisterPlayerProfileDependencies();
+services.RegisterPlayerProfileHandlers();
 
 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

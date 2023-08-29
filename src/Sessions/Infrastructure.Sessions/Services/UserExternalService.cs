@@ -1,4 +1,4 @@
-﻿using Application.Profiles.DTO;
+﻿using Application.PlayerProfiles.DTO;
 using Application.Sessions.DTO;
 using Application.Sessions.Interfaces;
 using Newtonsoft.Json;

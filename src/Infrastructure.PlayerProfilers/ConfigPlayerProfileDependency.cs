@@ -1,4 +1,4 @@
-﻿using Application.Profiles.Interfaces;
+﻿using Application.PlayerProfiles.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Common.Logging;

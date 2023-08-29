@@ -1,5 +1,5 @@
-﻿using Application.Profiles.Commands;
-using Application.Profiles.DTO;
+﻿using Application.PlayerProfiles.Commands;
+using Application.PlayerProfiles.DTO;
 using AutoMapper;
 using Domain.Entities;
 
