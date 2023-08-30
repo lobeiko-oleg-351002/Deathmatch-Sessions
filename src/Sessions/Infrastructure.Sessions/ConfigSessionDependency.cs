@@ -5,7 +5,7 @@ using Infrastructure.Sessions.Services;
 using Domain.Interfaces;
 using Domain.Entities;
 using Infrastructure.Common.Repository;
-using Application.Sessions.Messages;
+using Infrastructure.Sessions.Mapping;
 
 namespace Infrastructure.Sessions;
 
@@ -14,6 +14,9 @@ public static class ConfigSessionDependency
     public static IServiceCollection RegisterSessionDependencies(
     this IServiceCollection services)
     {
+        services.AddAutoMapper(typeof(SessionMapperProfile).Assembly);
+        services.AddAutoMapper(typeof(ProfileInSessionMapperProfile).Assembly);
+
         services.AddScoped<ILogMessageManager<Session>, LogMessageManager<Session>>();
         services.AddScoped<ISessionRepository, SessionRepository>();
         services.AddScoped<ISessionService, SessionService>();

@@ -19,8 +19,6 @@ services.RegisterSessionHandlers();
 services.RegisterPlayerProfileDependencies();
 services.RegisterPlayerProfileHandlers();
 
-services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 services.AddSwaggerGen();
 
 var app = builder.Build();

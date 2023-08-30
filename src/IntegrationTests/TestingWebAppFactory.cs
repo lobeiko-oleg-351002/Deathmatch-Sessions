@@ -29,19 +29,21 @@ public class TestingWebAppFactory<TEntryPoint> : WebApplicationFactory<Program> 
             using (var scope = sp.CreateScope())
             using (var appContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
             {
-                appContext.Database.EnsureCreated();
                 var locationSeeder = scope.ServiceProvider.GetRequiredService<ILocationSeeder>();
                 var sessionSeeder = scope.ServiceProvider.GetRequiredService<ISessionSeeder>();
                 var playerProfileSeeder = scope.ServiceProvider.GetRequiredService<IPlayerProfileSeeder>();
-                try
+                if (!appContext.Database.EnsureCreated())
                 {
-                    locationSeeder.Execute();
-                    sessionSeeder.Execute();
-                    playerProfileSeeder.Execute();
-                }
-                catch (Exception ex)
-                {
-                    throw;
+                    try
+                    {
+                        locationSeeder.Execute();
+                        sessionSeeder.Execute();
+                        playerProfileSeeder.Execute();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
                 }
             }
         });
