@@ -27,6 +27,8 @@
     <ProjectReference Include="..\..\Infrastructure.PlayerProfilers\Infrastructure.PlayerProfilers.csproj" />
     <ProjectReference Include="..\..\Locations\Application.Locations\Application.Locations.csproj" />
     <ProjectReference Include="..\..\Locations\Infrastructure.Locations\Infrastructure.Locations.csproj" />
+    <ProjectReference Include="..\..\PlayerProfiles\Application.PlayerProfiles\Application.PlayerProfiles.csproj" />
+    <ProjectReference Include="..\..\PlayerProfiles\Infrastructure.PlayerProfiles\Infrastructure.PlayerProfiles.csproj" />
     <ProjectReference Include="..\..\Sessions\Application.Sessions\Application.Sessions.csproj" />
     <ProjectReference Include="..\..\Sessions\Infrastructure.Sessions\Infrastructure.Sessions.csproj" />
   </ItemGroup>
