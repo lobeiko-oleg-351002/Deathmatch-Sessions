@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application.Profiles\Application.PlayerProfiles.csproj" />
-    <ProjectReference Include="..\Common\Domain\Domain.csproj" />
-    <ProjectReference Include="..\Common\Infrastructure.Common\Infrastructure.Common.csproj" />
+    <ProjectReference Include="..\..\Common\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\Common\Infrastructure.Common\Infrastructure.Common.csproj" />
+    <ProjectReference Include="..\Application.PlayerProfiles\Application.PlayerProfiles.csproj" />
   </ItemGroup>
 
 </Project>
