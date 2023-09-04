@@ -80,7 +80,8 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
 
-
+    - name: ENVIRONMENT
+      run: echo "$env"
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
