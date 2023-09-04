@@ -56,7 +56,7 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      working-directory: src
+      working-directory: Deathmatch-Sessions\src
       Solution_Name: Deathmatch-Sessions.sln             
       LocationUnitTests: LocationUnitTests\LocationUnitTests.csproj                
       SessionUnitTests: SessionUnitTests\SessionUnitTests.csproj   
@@ -82,7 +82,7 @@ jobs:
 
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet test Deathmatch-Sessions.sln
+      run: dotnet test
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
