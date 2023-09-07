@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Deathmatch_Sessions</RootNamespace>
+    <UserSecretsId>9bea983e-6ab6-41ac-ab57-1c162b7500f1</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,16 +19,15 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Application.Profiles\Application.PlayerProfiles.csproj" />
     <ProjectReference Include="..\..\Common\Application.Common\Application.Common.csproj" />
     <ProjectReference Include="..\..\Common\Infrastructure.Common\Infrastructure.Common.csproj" />
-    <ProjectReference Include="..\..\Infrastructure.PlayerProfilers\Infrastructure.PlayerProfilers.csproj" />
     <ProjectReference Include="..\..\Locations\Application.Locations\Application.Locations.csproj" />
     <ProjectReference Include="..\..\Locations\Infrastructure.Locations\Infrastructure.Locations.csproj" />
     <ProjectReference Include="..\..\PlayerProfiles\Application.PlayerProfiles\Application.PlayerProfiles.csproj" />

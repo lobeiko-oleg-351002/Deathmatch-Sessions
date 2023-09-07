@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  deathmatch-sessions:
+    image: ${DOCKER_REGISTRY-}deathmatchsessions
+    build:
+      context: .
+      dockerfile: Api/Deathmatch-Sessions/Dockerfile
+  sqldb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqldb
+    environment:
+        - SA_PASSWORD=RaynorRaiders44
+        - ACCEPT_EULA=Y
+    ports:
+        - "1440:1433"
+
+
