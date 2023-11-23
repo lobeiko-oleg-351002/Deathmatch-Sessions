@@ -17,6 +17,6 @@ public class GetAllLocationsQueryHandler : IRequestHandler<GetAllLocationsQuery,
     }
     public async Task<IList<ViewLocationDTO>> Handle(GetAllLocationsQuery request, CancellationToken cancellationToken)
     {
-        return await _LocationService.GetAll();
+        ; return await _LocationService.GetAll();
     }
 }

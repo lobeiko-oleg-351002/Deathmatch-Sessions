@@ -23,7 +23,7 @@ services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+//if (!app.Environment.IsDevelopment())
 {
     app.UseHsts();
 }
@@ -31,16 +31,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-else
-{
-    app.UseDefaultFiles();
-    app.UseStaticFiles();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.MapControllers();
 

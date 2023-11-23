@@ -6,6 +6,7 @@ using Domain.Interfaces;
 using Domain.Entities;
 using Infrastructure.Common.Repository;
 using Infrastructure.Sessions.Mapping;
+using Infrastructure.Common.MongoRepository;
 
 namespace Infrastructure.Sessions;
 
@@ -20,6 +21,7 @@ public static class ConfigSessionDependency
         services.AddScoped<ILogMessageManager<Session>, LogMessageManager<Session>>();
         services.AddScoped<ISessionRepository, SessionRepository>();
         services.AddScoped<ISessionService, SessionService>();
+        services.AddScoped<ILoggerRepository, SessionLogRepository>();
 
         services.AddScoped<ILogMessageManager<PlayerProfile>, LogMessageManager<PlayerProfile>>();
         services.AddScoped<IPlayerProfileRepository, PlayerProfileRepository>();
