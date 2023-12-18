@@ -24,6 +24,7 @@ stages:
       displayName: Build an image
       inputs:
         command: build
+        buildContext: $(System.DefaultWorkingDirectory)
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
